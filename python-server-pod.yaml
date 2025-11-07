@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bme-python-server
+  namespace: bme-stack
+  labels:
+    app: python-server
+spec:
+  containers:
+  - name: python-server
+    image: python:3.9-slim
+    command: ["/bin/bash"]
+    args: ["-c", "sleep infinity"]
+    ports:
+    - containerPort: x
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: bme-python-service
+  namespace: bme-stack
+spec:
+  selector:
+    app: python-server
+  ports:
+  - protocol: TCP
+    port: x
+    targetPort: x
+  type: NodePort
